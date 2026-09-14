@@ -28,7 +28,6 @@ execFileSync('zip', ['-q', '-r', zip, '.'], { cwd: outDir });
 
 console.log(`built ${manifest.symbols.length} symbols -> dist/svg/`);
 console.log(`packaged -> ${path.relative(root, zip)}`);
-if (manifest.provisional) console.log('WARNING: symbols.json is provisional; names are not the v14 names.');
 if (problems.length) {
   console.error(`\n${problems.length} problem(s):`);
   for (const p of problems) console.error('  ' + p);

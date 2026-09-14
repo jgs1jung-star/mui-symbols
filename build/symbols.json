@@ -1,28 +1,381 @@
 {
-  "provisional": true,
   "symbols": [
     {
-      "name": "ISO_ADSORB",
-      "type": "adsorb",
+      "name": "ISO_AHU",
+      "type": "ahu",
       "params": {}
     },
     {
-      "name": "ISO_ADSORB_R90",
-      "type": "adsorb",
+      "name": "ISO_FAN",
+      "type": "fan",
+      "params": {}
+    },
+    {
+      "name": "ISO_FCU",
+      "type": "fcu",
+      "params": {}
+    },
+    {
+      "name": "ISO_DAMPER",
+      "type": "damper",
+      "params": {}
+    },
+    {
+      "name": "ISO_CCOIL",
+      "type": "ccoil",
+      "params": {}
+    },
+    {
+      "name": "ISO_HCOIL",
+      "type": "hcoil",
+      "params": {}
+    },
+    {
+      "name": "ISO_FILTER",
+      "type": "filter",
+      "params": {}
+    },
+    {
+      "name": "ISO_HUMID",
+      "type": "humid",
+      "params": {}
+    },
+    {
+      "name": "ISO_CHILLER",
+      "type": "chiller",
+      "params": {}
+    },
+    {
+      "name": "ISO_BOILER",
+      "type": "boiler",
+      "params": {}
+    },
+    {
+      "name": "ISO_TOWER",
+      "type": "tower",
+      "params": {}
+    },
+    {
+      "name": "ISO_PUMP",
+      "type": "pump",
+      "params": {}
+    },
+    {
+      "name": "ISO_VALVE2",
+      "type": "valve2",
+      "params": {}
+    },
+    {
+      "name": "ISO_VALVE3",
+      "type": "valve3",
+      "params": {}
+    },
+    {
+      "name": "ISO_PHE",
+      "type": "phe",
+      "params": {}
+    },
+    {
+      "name": "ISO_EXPTANK",
+      "type": "exptank",
+      "params": {}
+    },
+    {
+      "name": "ISO_SCREW",
+      "type": "screw",
+      "params": {}
+    },
+    {
+      "name": "ISO_SCREW_R90",
+      "type": "screw",
       "params": {
         "rot": 90
       }
     },
     {
-      "name": "ISO_ADSORB_R180",
-      "type": "adsorb",
+      "name": "ISO_SCREW_R180",
+      "type": "screw",
       "params": {
         "rot": 180
       }
     },
     {
-      "name": "ISO_ADSORB_R270",
-      "type": "adsorb",
+      "name": "ISO_SCREW_R270",
+      "type": "screw",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_PUMPMS_5ST",
+      "type": "pumpms",
+      "params": {
+        "stages": 5
+      }
+    },
+    {
+      "name": "ISO_PUMPMS_5ST_R90",
+      "type": "pumpms",
+      "params": {
+        "stages": 5,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_PUMPMS_5ST_R180",
+      "type": "pumpms",
+      "params": {
+        "stages": 5,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_PUMPMS_5ST_R270",
+      "type": "pumpms",
+      "params": {
+        "stages": 5,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_PUMPMS_7ST",
+      "type": "pumpms",
+      "params": {
+        "stages": 7
+      }
+    },
+    {
+      "name": "ISO_PUMPMS_7ST_R90",
+      "type": "pumpms",
+      "params": {
+        "stages": 7,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_PUMPMS_7ST_R180",
+      "type": "pumpms",
+      "params": {
+        "stages": 7,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_PUMPMS_7ST_R270",
+      "type": "pumpms",
+      "params": {
+        "stages": 7,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_PUMPV_6ST",
+      "type": "pumpv",
+      "params": {
+        "stages": 6
+      }
+    },
+    {
+      "name": "ISO_PUMPV_6ST_R90",
+      "type": "pumpv",
+      "params": {
+        "stages": 6,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_PUMPV_6ST_R180",
+      "type": "pumpv",
+      "params": {
+        "stages": 6,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_PUMPV_6ST_R270",
+      "type": "pumpv",
+      "params": {
+        "stages": 6,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_VACUUM_2",
+      "type": "vacuum",
+      "params": {
+        "n": 2
+      }
+    },
+    {
+      "name": "ISO_VACUUM_2_R90",
+      "type": "vacuum",
+      "params": {
+        "n": 2,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_VACUUM_2_R180",
+      "type": "vacuum",
+      "params": {
+        "n": 2,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_VACUUM_2_R270",
+      "type": "vacuum",
+      "params": {
+        "n": 2,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_VACUUM_3",
+      "type": "vacuum",
+      "params": {
+        "n": 3
+      }
+    },
+    {
+      "name": "ISO_VACUUM_3_R90",
+      "type": "vacuum",
+      "params": {
+        "n": 3,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_VACUUM_3_R180",
+      "type": "vacuum",
+      "params": {
+        "n": 3,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_VACUUM_3_R270",
+      "type": "vacuum",
+      "params": {
+        "n": 3,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_VACUUM_4",
+      "type": "vacuum",
+      "params": {
+        "n": 4
+      }
+    },
+    {
+      "name": "ISO_VACUUM_4_R90",
+      "type": "vacuum",
+      "params": {
+        "n": 4,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_VACUUM_4_R180",
+      "type": "vacuum",
+      "params": {
+        "n": 4,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_VACUUM_4_R270",
+      "type": "vacuum",
+      "params": {
+        "n": 4,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_AIRCOMP_CDA",
+      "type": "aircomp",
+      "params": {
+        "label": "CDA"
+      }
+    },
+    {
+      "name": "ISO_AIRCOMP_CDA_R90",
+      "type": "aircomp",
+      "params": {
+        "label": "CDA",
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_AIRCOMP_CDA_R180",
+      "type": "aircomp",
+      "params": {
+        "label": "CDA",
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_AIRCOMP_CDA_R270",
+      "type": "aircomp",
+      "params": {
+        "label": "CDA",
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_AIRCOMP_IA",
+      "type": "aircomp",
+      "params": {
+        "label": "IA"
+      }
+    },
+    {
+      "name": "ISO_AIRCOMP_IA_R90",
+      "type": "aircomp",
+      "params": {
+        "label": "IA",
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_AIRCOMP_IA_R180",
+      "type": "aircomp",
+      "params": {
+        "label": "IA",
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_AIRCOMP_IA_R270",
+      "type": "aircomp",
+      "params": {
+        "label": "IA",
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_AIRTANK",
+      "type": "airtank",
+      "params": {}
+    },
+    {
+      "name": "ISO_AIRTANK_R90",
+      "type": "airtank",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_AIRTANK_R180",
+      "type": "airtank",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_AIRTANK_R270",
+      "type": "airtank",
       "params": {
         "rot": 270
       }
@@ -54,109 +407,6 @@
       }
     },
     {
-      "name": "ISO_AHU",
-      "type": "ahu",
-      "params": {}
-    },
-    {
-      "name": "ISO_AIRCOMP",
-      "type": "aircomp",
-      "params": {}
-    },
-    {
-      "name": "ISO_AIRCOMP_R90",
-      "type": "aircomp",
-      "params": {
-        "rot": 90
-      }
-    },
-    {
-      "name": "ISO_AIRCOMP_R180",
-      "type": "aircomp",
-      "params": {
-        "rot": 180
-      }
-    },
-    {
-      "name": "ISO_AIRCOMP_R270",
-      "type": "aircomp",
-      "params": {
-        "rot": 270
-      }
-    },
-    {
-      "name": "ISO_AIRTANK",
-      "type": "airtank",
-      "params": {}
-    },
-    {
-      "name": "ISO_AIRTANK_R90",
-      "type": "airtank",
-      "params": {
-        "rot": 90
-      }
-    },
-    {
-      "name": "ISO_AIRTANK_R180",
-      "type": "airtank",
-      "params": {
-        "rot": 180
-      }
-    },
-    {
-      "name": "ISO_AIRTANK_R270",
-      "type": "airtank",
-      "params": {
-        "rot": 270
-      }
-    },
-    {
-      "name": "ISO_BOILER",
-      "type": "boiler",
-      "params": {}
-    },
-    {
-      "name": "ISO_CCOIL",
-      "type": "ccoil",
-      "params": {}
-    },
-    {
-      "name": "ISO_CHILLER",
-      "type": "chiller",
-      "params": {}
-    },
-    {
-      "name": "ISO_DAMPER",
-      "type": "damper",
-      "params": {}
-    },
-    {
-      "name": "ISO_DI",
-      "type": "di",
-      "params": {}
-    },
-    {
-      "name": "ISO_DI_R90",
-      "type": "di",
-      "params": {
-        "rot": 90
-      }
-    },
-    {
-      "name": "ISO_DI_R180",
-      "type": "di",
-      "params": {
-        "rot": 180
-      }
-    },
-    {
-      "name": "ISO_DI_R270",
-      "type": "di",
-      "params": {
-        "rot": 270
-      }
-    },
-    {
       "name": "ISO_DRYER",
       "type": "dryer",
       "params": {}
@@ -183,24 +433,371 @@
       }
     },
     {
-      "name": "ISO_DUCT",
-      "type": "duct",
+      "name": "ISO_ADSORB",
+      "type": "adsorb",
       "params": {}
     },
     {
-      "name": "ISO_DUCTJOINT",
-      "type": "ductjoint",
-      "params": {}
+      "name": "ISO_ADSORB_R90",
+      "type": "adsorb",
+      "params": {
+        "rot": 90
+      }
     },
     {
-      "name": "ISO_ELBOW",
-      "type": "elbow",
-      "params": {}
+      "name": "ISO_ADSORB_R180",
+      "type": "adsorb",
+      "params": {
+        "rot": 180
+      }
     },
     {
-      "name": "ISO_EXPTANK",
-      "type": "exptank",
-      "params": {}
+      "name": "ISO_ADSORB_R270",
+      "type": "adsorb",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_RO_3V",
+      "type": "ro",
+      "params": {
+        "vessels": 3
+      }
+    },
+    {
+      "name": "ISO_RO_3V_R90",
+      "type": "ro",
+      "params": {
+        "vessels": 3,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_RO_3V_R180",
+      "type": "ro",
+      "params": {
+        "vessels": 3,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_RO_3V_R270",
+      "type": "ro",
+      "params": {
+        "vessels": 3,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_RO_4V",
+      "type": "ro",
+      "params": {
+        "vessels": 4
+      }
+    },
+    {
+      "name": "ISO_RO_4V_R90",
+      "type": "ro",
+      "params": {
+        "vessels": 4,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_RO_4V_R180",
+      "type": "ro",
+      "params": {
+        "vessels": 4,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_RO_4V_R270",
+      "type": "ro",
+      "params": {
+        "vessels": 4,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_RO_6V",
+      "type": "ro",
+      "params": {
+        "vessels": 6
+      }
+    },
+    {
+      "name": "ISO_RO_6V_R90",
+      "type": "ro",
+      "params": {
+        "vessels": 6,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_RO_6V_R180",
+      "type": "ro",
+      "params": {
+        "vessels": 6,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_RO_6V_R270",
+      "type": "ro",
+      "params": {
+        "vessels": 6,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_DI_2C",
+      "type": "di",
+      "params": {
+        "cols": 2
+      }
+    },
+    {
+      "name": "ISO_DI_2C_R90",
+      "type": "di",
+      "params": {
+        "cols": 2,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_DI_2C_R180",
+      "type": "di",
+      "params": {
+        "cols": 2,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_DI_2C_R270",
+      "type": "di",
+      "params": {
+        "cols": 2,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_DI_3C",
+      "type": "di",
+      "params": {
+        "cols": 3
+      }
+    },
+    {
+      "name": "ISO_DI_3C_R90",
+      "type": "di",
+      "params": {
+        "cols": 3,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_DI_3C_R180",
+      "type": "di",
+      "params": {
+        "cols": 3,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_DI_3C_R270",
+      "type": "di",
+      "params": {
+        "cols": 3,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_GASCAB_1CYL",
+      "type": "gascab",
+      "params": {
+        "cyl": 1
+      }
+    },
+    {
+      "name": "ISO_GASCAB_1CYL_R90",
+      "type": "gascab",
+      "params": {
+        "cyl": 1,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_GASCAB_1CYL_R180",
+      "type": "gascab",
+      "params": {
+        "cyl": 1,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_GASCAB_1CYL_R270",
+      "type": "gascab",
+      "params": {
+        "cyl": 1,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_GASCAB_2CYL",
+      "type": "gascab",
+      "params": {
+        "cyl": 2
+      }
+    },
+    {
+      "name": "ISO_GASCAB_2CYL_R90",
+      "type": "gascab",
+      "params": {
+        "cyl": 2,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_GASCAB_2CYL_R180",
+      "type": "gascab",
+      "params": {
+        "cyl": 2,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_GASCAB_2CYL_R270",
+      "type": "gascab",
+      "params": {
+        "cyl": 2,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_GASRACK_3CYL",
+      "type": "gasrack",
+      "params": {
+        "cyl": 3
+      }
+    },
+    {
+      "name": "ISO_GASRACK_3CYL_R90",
+      "type": "gasrack",
+      "params": {
+        "cyl": 3,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_GASRACK_3CYL_R180",
+      "type": "gasrack",
+      "params": {
+        "cyl": 3,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_GASRACK_3CYL_R270",
+      "type": "gasrack",
+      "params": {
+        "cyl": 3,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_GASRACK_6CYL",
+      "type": "gasrack",
+      "params": {
+        "cyl": 6
+      }
+    },
+    {
+      "name": "ISO_GASRACK_6CYL_R90",
+      "type": "gasrack",
+      "params": {
+        "cyl": 6,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_GASRACK_6CYL_R180",
+      "type": "gasrack",
+      "params": {
+        "cyl": 6,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_GASRACK_6CYL_R270",
+      "type": "gasrack",
+      "params": {
+        "cyl": 6,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_HEADER_4W",
+      "type": "header",
+      "params": {
+        "n": 4
+      }
+    },
+    {
+      "name": "ISO_HEADER_4W_R90",
+      "type": "header",
+      "params": {
+        "n": 4,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_HEADER_4W_R180",
+      "type": "header",
+      "params": {
+        "n": 4,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_HEADER_4W_R270",
+      "type": "header",
+      "params": {
+        "n": 4,
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_HEADER_6W",
+      "type": "header",
+      "params": {
+        "n": 6
+      }
+    },
+    {
+      "name": "ISO_HEADER_6W_R90",
+      "type": "header",
+      "params": {
+        "n": 6,
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_HEADER_6W_R180",
+      "type": "header",
+      "params": {
+        "n": 6,
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_HEADER_6W_R270",
+      "type": "header",
+      "params": {
+        "n": 6,
+        "rot": 270
+      }
     },
     {
       "name": "ISO_EXPTANK2",
@@ -229,124 +826,6 @@
       }
     },
     {
-      "name": "ISO_FAN",
-      "type": "fan",
-      "params": {}
-    },
-    {
-      "name": "ISO_FCU",
-      "type": "fcu",
-      "params": {}
-    },
-    {
-      "name": "ISO_FILTER",
-      "type": "filter",
-      "params": {}
-    },
-    {
-      "name": "ISO_GASCAB",
-      "type": "gascab",
-      "params": {}
-    },
-    {
-      "name": "ISO_GASCAB_R90",
-      "type": "gascab",
-      "params": {
-        "rot": 90
-      }
-    },
-    {
-      "name": "ISO_GASCAB_R180",
-      "type": "gascab",
-      "params": {
-        "rot": 180
-      }
-    },
-    {
-      "name": "ISO_GASCAB_R270",
-      "type": "gascab",
-      "params": {
-        "rot": 270
-      }
-    },
-    {
-      "name": "ISO_GASRACK",
-      "type": "gasrack",
-      "params": {}
-    },
-    {
-      "name": "ISO_GASRACK_R90",
-      "type": "gasrack",
-      "params": {
-        "rot": 90
-      }
-    },
-    {
-      "name": "ISO_GASRACK_R180",
-      "type": "gasrack",
-      "params": {
-        "rot": 180
-      }
-    },
-    {
-      "name": "ISO_GASRACK_R270",
-      "type": "gasrack",
-      "params": {
-        "rot": 270
-      }
-    },
-    {
-      "name": "ISO_HCOIL",
-      "type": "hcoil",
-      "params": {}
-    },
-    {
-      "name": "ISO_HEADER",
-      "type": "header",
-      "params": {}
-    },
-    {
-      "name": "ISO_HEADER_R90",
-      "type": "header",
-      "params": {
-        "rot": 90
-      }
-    },
-    {
-      "name": "ISO_HEADER_R180",
-      "type": "header",
-      "params": {
-        "rot": 180
-      }
-    },
-    {
-      "name": "ISO_HEADER_R270",
-      "type": "header",
-      "params": {
-        "rot": 270
-      }
-    },
-    {
-      "name": "ISO_HUMID",
-      "type": "humid",
-      "params": {}
-    },
-    {
-      "name": "ISO_INLINEFAN",
-      "type": "inlinefan",
-      "params": {}
-    },
-    {
-      "name": "ISO_JETFAN",
-      "type": "jetfan",
-      "params": {}
-    },
-    {
-      "name": "ISO_JOINT",
-      "type": "joint",
-      "params": {}
-    },
-    {
       "name": "ISO_N2TANK",
       "type": "n2tank",
       "params": {}
@@ -373,169 +852,11 @@
       }
     },
     {
-      "name": "ISO_PHE",
-      "type": "phe",
-      "params": {}
-    },
-    {
-      "name": "ISO_PIPE",
-      "type": "pipe",
-      "params": {}
-    },
-    {
-      "name": "ISO_PUMP",
-      "type": "pump",
-      "params": {}
-    },
-    {
-      "name": "ISO_PUMPMS",
-      "type": "pumpms",
-      "params": {}
-    },
-    {
-      "name": "ISO_PUMPMS_R90",
-      "type": "pumpms",
+      "name": "ISO_N2TANK_CUT",
+      "type": "n2tank",
       "params": {
-        "rot": 90
+        "cut": 1
       }
-    },
-    {
-      "name": "ISO_PUMPMS_R180",
-      "type": "pumpms",
-      "params": {
-        "rot": 180
-      }
-    },
-    {
-      "name": "ISO_PUMPMS_R270",
-      "type": "pumpms",
-      "params": {
-        "rot": 270
-      }
-    },
-    {
-      "name": "ISO_PUMPV",
-      "type": "pumpv",
-      "params": {}
-    },
-    {
-      "name": "ISO_PUMPV_R90",
-      "type": "pumpv",
-      "params": {
-        "rot": 90
-      }
-    },
-    {
-      "name": "ISO_PUMPV_R180",
-      "type": "pumpv",
-      "params": {
-        "rot": 180
-      }
-    },
-    {
-      "name": "ISO_PUMPV_R270",
-      "type": "pumpv",
-      "params": {
-        "rot": 270
-      }
-    },
-    {
-      "name": "ISO_RO",
-      "type": "ro",
-      "params": {}
-    },
-    {
-      "name": "ISO_RO_R90",
-      "type": "ro",
-      "params": {
-        "rot": 90
-      }
-    },
-    {
-      "name": "ISO_RO_R180",
-      "type": "ro",
-      "params": {
-        "rot": 180
-      }
-    },
-    {
-      "name": "ISO_RO_R270",
-      "type": "ro",
-      "params": {
-        "rot": 270
-      }
-    },
-    {
-      "name": "ISO_SCREW",
-      "type": "screw",
-      "params": {}
-    },
-    {
-      "name": "ISO_SCREW_R90",
-      "type": "screw",
-      "params": {
-        "rot": 90
-      }
-    },
-    {
-      "name": "ISO_SCREW_R180",
-      "type": "screw",
-      "params": {
-        "rot": 180
-      }
-    },
-    {
-      "name": "ISO_SCREW_R270",
-      "type": "screw",
-      "params": {
-        "rot": 270
-      }
-    },
-    {
-      "name": "ISO_TEE",
-      "type": "tee",
-      "params": {}
-    },
-    {
-      "name": "ISO_TOWER",
-      "type": "tower",
-      "params": {}
-    },
-    {
-      "name": "ISO_VACUUM",
-      "type": "vacuum",
-      "params": {}
-    },
-    {
-      "name": "ISO_VACUUM_R90",
-      "type": "vacuum",
-      "params": {
-        "rot": 90
-      }
-    },
-    {
-      "name": "ISO_VACUUM_R180",
-      "type": "vacuum",
-      "params": {
-        "rot": 180
-      }
-    },
-    {
-      "name": "ISO_VACUUM_R270",
-      "type": "vacuum",
-      "params": {
-        "rot": 270
-      }
-    },
-    {
-      "name": "ISO_VALVE2",
-      "type": "valve2",
-      "params": {}
-    },
-    {
-      "name": "ISO_VALVE3",
-      "type": "valve3",
-      "params": {}
     },
     {
       "name": "ISO_WATERTANK",
@@ -561,6 +882,936 @@
       "type": "watertank",
       "params": {
         "rot": 270
+      }
+    },
+    {
+      "name": "ISO_WATERTANK_CUT",
+      "type": "watertank",
+      "params": {
+        "cut": 1
+      }
+    },
+    {
+      "name": "ISO_JETFAN_X",
+      "type": "jetfan",
+      "params": {
+        "dir": "x"
+      }
+    },
+    {
+      "name": "ISO_JETFAN_Y",
+      "type": "jetfan",
+      "params": {
+        "dir": "y"
+      }
+    },
+    {
+      "name": "ISO_INLINEFAN_X",
+      "type": "inlinefan",
+      "params": {
+        "dir": "x"
+      }
+    },
+    {
+      "name": "ISO_INLINEFAN_Y",
+      "type": "inlinefan",
+      "params": {
+        "dir": "y"
+      }
+    },
+    {
+      "name": "ISO_JOINT_D12",
+      "type": "joint",
+      "params": {
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_PIPE_D12_X",
+      "type": "pipe",
+      "params": {
+        "dir": "x",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_PIPE_D12_Y",
+      "type": "pipe",
+      "params": {
+        "dir": "y",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_PIPE_D12_Z",
+      "type": "pipe",
+      "params": {
+        "dir": "z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_PXPY",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "+y",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_PXMY",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "-y",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_MXPY",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "+y",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_MXMY",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "-y",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_PYPX",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "+x",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_PYMX",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "-x",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_MYPX",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "+x",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_MYMX",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "-x",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_PXPZ",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "+z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_PXMZ",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "-z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_MXPZ",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "+z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_MXMZ",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "-z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_PYPZ",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "+z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_PYMZ",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "-z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_MYPZ",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "+z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D12_MYMZ",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "-z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D12_X_PY",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "+y",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D12_X_MY",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "-y",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D12_X_PZ",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "+z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D12_X_MZ",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "-z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D12_Y_PX",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "+x",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D12_Y_MX",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "-x",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D12_Y_PZ",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "+z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D12_Y_MZ",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "-z",
+        "d": 12,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_JOINT_D20",
+      "type": "joint",
+      "params": {
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_PIPE_D20_X",
+      "type": "pipe",
+      "params": {
+        "dir": "x",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_PIPE_D20_Y",
+      "type": "pipe",
+      "params": {
+        "dir": "y",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_PIPE_D20_Z",
+      "type": "pipe",
+      "params": {
+        "dir": "z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_PXPY",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "+y",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_PXMY",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "-y",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_MXPY",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "+y",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_MXMY",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "-y",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_PYPX",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "+x",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_PYMX",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "-x",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_MYPX",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "+x",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_MYMX",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "-x",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_PXPZ",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "+z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_PXMZ",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "-z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_MXPZ",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "+z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_MXMZ",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "-z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_PYPZ",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "+z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_PYMZ",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "-z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_MYPZ",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "+z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D20_MYMZ",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "-z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D20_X_PY",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "+y",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D20_X_MY",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "-y",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D20_X_PZ",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "+z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D20_X_MZ",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "-z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D20_Y_PX",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "+x",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D20_Y_MX",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "-x",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D20_Y_PZ",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "+z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D20_Y_MZ",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "-z",
+        "d": 20,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_JOINT_D32",
+      "type": "joint",
+      "params": {
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_PIPE_D32_X",
+      "type": "pipe",
+      "params": {
+        "dir": "x",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_PIPE_D32_Y",
+      "type": "pipe",
+      "params": {
+        "dir": "y",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_PIPE_D32_Z",
+      "type": "pipe",
+      "params": {
+        "dir": "z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_PXPY",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "+y",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_PXMY",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "-y",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_MXPY",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "+y",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_MXMY",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "-y",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_PYPX",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "+x",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_PYMX",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "-x",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_MYPX",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "+x",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_MYMX",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "-x",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_PXPZ",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "+z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_PXMZ",
+      "type": "elbow",
+      "params": {
+        "a": "+x",
+        "b": "-z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_MXPZ",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "+z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_MXMZ",
+      "type": "elbow",
+      "params": {
+        "a": "-x",
+        "b": "-z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_PYPZ",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "+z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_PYMZ",
+      "type": "elbow",
+      "params": {
+        "a": "+y",
+        "b": "-z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_MYPZ",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "+z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_ELBOW_D32_MYMZ",
+      "type": "elbow",
+      "params": {
+        "a": "-y",
+        "b": "-z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D32_X_PY",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "+y",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D32_X_MY",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "-y",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D32_X_PZ",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "+z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D32_X_MZ",
+      "type": "tee",
+      "params": {
+        "run": "x",
+        "br": "-z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D32_Y_PX",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "+x",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D32_Y_MX",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "-x",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D32_Y_PZ",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "+z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_TEE_D32_Y_MZ",
+      "type": "tee",
+      "params": {
+        "run": "y",
+        "br": "-z",
+        "d": 32,
+        "svc": "chws"
+      }
+    },
+    {
+      "name": "ISO_DUCTJOINT_70X50",
+      "type": "ductjoint",
+      "params": {
+        "w": 70,
+        "h": 50
+      }
+    },
+    {
+      "name": "ISO_DUCT_70X50_X",
+      "type": "duct",
+      "params": {
+        "dir": "x",
+        "w": 70,
+        "h": 50
+      }
+    },
+    {
+      "name": "ISO_DUCT_70X50_Y",
+      "type": "duct",
+      "params": {
+        "dir": "y",
+        "w": 70,
+        "h": 50
+      }
+    },
+    {
+      "name": "ISO_DUCT_70X50_Z",
+      "type": "duct",
+      "params": {
+        "dir": "z",
+        "w": 70,
+        "h": 50
+      }
+    },
+    {
+      "name": "ISO_DUCTJOINT_120X80",
+      "type": "ductjoint",
+      "params": {
+        "w": 120,
+        "h": 80
+      }
+    },
+    {
+      "name": "ISO_DUCT_120X80_X",
+      "type": "duct",
+      "params": {
+        "dir": "x",
+        "w": 120,
+        "h": 80
+      }
+    },
+    {
+      "name": "ISO_DUCT_120X80_Y",
+      "type": "duct",
+      "params": {
+        "dir": "y",
+        "w": 120,
+        "h": 80
+      }
+    },
+    {
+      "name": "ISO_DUCT_120X80_Z",
+      "type": "duct",
+      "params": {
+        "dir": "z",
+        "w": 120,
+        "h": 80
       }
     }
   ]

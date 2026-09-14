@@ -36,17 +36,29 @@ failure mode that shows up in Metasys as a clipped symbol.
 
 ## Status
 
-The engine and the studio are complete and are the pieces that matter.
+The engine, the studio and the build are working. `node build/build.js`
+currently produces **222 symbols** (2.4 MB zip), all of which render inside
+their viewBox and parse as well-formed XML.
 
-`build/symbols.json` is **provisional**. The released v14 package contained 277
-symbols (139 base plus `_R90`/`_R180`/`_R270` variants) whose names and
-parameter sets came from a build script that was lost. The current manifest is
-a stand-in generated from each builder's default parameters — 92 entries with
-placeholder `ISO_*` names.
+The symbol set is defined from scratch in `build/gen-manifest.js` rather than
+recovered from the released v14 package, so **the names differ from v14's**.
+Graphics that referenced the old `_R90`-style v14 names will need to be
+repointed. This was a deliberate call - the v14 build script was lost, and
+rebuilding the set cleanly was preferred over reproducing names by guesswork.
 
-Before publishing a package, rebuild the manifest from
-`MUI-CustomSymbols-Isometric-v14.zip` so the released names are preserved.
-Renaming symbols breaks the references in graphics that already use them.
+What ships:
+
+| Group | Count | Notes |
+|---|---|---|
+| Fixed HVAC equipment | 16 | `ISO_AHU`, `ISO_CHILLER`, `ISO_PUMP`, `ISO_VALVE2` ... |
+| Utility plant | 114 | sized variants (`ISO_RO_4V`, `ISO_GASCAB_2CYL`) x four facings |
+| Pipe family | 84 | 3 diameters x 28: one joint, three runs, 16 elbows, eight tees |
+| Duct | 8 | 2 sizes x three axes, plus joints |
+
+Adjust the config block at the top of `build/gen-manifest.js` to change which
+variants ship - pipe diameters, services, duct sizes, and the per-builder
+variant lists all live there. The generator drops any combination the engine
+cannot draw or that overflows its viewBox, and reports what it dropped.
 
 ## Engine notes
 
