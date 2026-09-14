@@ -171,8 +171,12 @@ var ISO = (function () {
     if (!this.once[key]) { this.once[key] = 1; this.defs.push(markup.split('@ID').join(id)); }
     return id;
   };
-  // soft blurred ground shadow under a footprint polygon (world xy at height z), drawn beneath everything
+  // soft blurred ground shadow under a footprint polygon (world xy at height z), drawn beneath everything.
+  // Metasys UI stock symbols carry no ground shadow, so SHADOWS is turned off while building
+  // MUI output; the studio keeps them. Skipping also leaves the shadow out of the bounding box.
+  var SHADOWS = true;
   Sym.prototype.shadow = function (pts2, z, op, blur) {
+    if (!SHADOWS) return;
     var id = this.def1('shb' + (blur || 5), '<filter id="@ID" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="' + (blur || 5) + '"/></filter>');
     var p3 = [], i, q, s = '';
     for (i = 0; i < pts2.length; i++) p3.push([pts2[i][0] + 7, pts2[i][1] - 4, z || 0]);
@@ -1951,6 +1955,7 @@ var ISO = (function () {
       var q = params(type, p), s = new Sym(name), vb, k = quarter(type, q);
       s.mui = true;
       setView(k);
+      SHADOWS = false;
       try {
         B[type](s, q);
         if (frame && (type === 'joint' || type === 'ductjoint')) vb = [-frame.mx, -frame.my, 2 * frame.mx, 2 * frame.my];
@@ -1979,7 +1984,7 @@ var ISO = (function () {
           (isRun ? ' pipecolorfornonetype="#FFFFFF" bas-symbols="pipJCId" svgfillopacity="1" selectedsystemtype="null" selectedshape="null"' : '') + '>' +
           '<g class="' + name + '"><g transform="translate(' + r1(-vb[0]) + ' ' + r1(-vb[1]) + ')">' + body(s) + '</g></g></svg>';
         return { svg: svg, w: W, h: H, joints: jt.join(' '), fit: [s.x0 >= vb[0] - 0.5, s.y0 >= vb[1] - 0.5, s.x1 <= vb[0] + vb[2] + 0.5, s.y1 <= vb[1] + vb[3] + 0.5] };
-      } finally { setView(0); }
+      } finally { setView(0); SHADOWS = true; }
     },
     ports: function (type, p) { return portsOf(type, params(type, p)); },
     center: function (type, p) {
