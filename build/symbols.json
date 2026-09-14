@@ -1,0 +1,567 @@
+{
+  "provisional": true,
+  "symbols": [
+    {
+      "name": "ISO_ADSORB",
+      "type": "adsorb",
+      "params": {}
+    },
+    {
+      "name": "ISO_ADSORB_R90",
+      "type": "adsorb",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_ADSORB_R180",
+      "type": "adsorb",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_ADSORB_R270",
+      "type": "adsorb",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_AFTERCOOLER",
+      "type": "aftercooler",
+      "params": {}
+    },
+    {
+      "name": "ISO_AFTERCOOLER_R90",
+      "type": "aftercooler",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_AFTERCOOLER_R180",
+      "type": "aftercooler",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_AFTERCOOLER_R270",
+      "type": "aftercooler",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_AHU",
+      "type": "ahu",
+      "params": {}
+    },
+    {
+      "name": "ISO_AIRCOMP",
+      "type": "aircomp",
+      "params": {}
+    },
+    {
+      "name": "ISO_AIRCOMP_R90",
+      "type": "aircomp",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_AIRCOMP_R180",
+      "type": "aircomp",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_AIRCOMP_R270",
+      "type": "aircomp",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_AIRTANK",
+      "type": "airtank",
+      "params": {}
+    },
+    {
+      "name": "ISO_AIRTANK_R90",
+      "type": "airtank",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_AIRTANK_R180",
+      "type": "airtank",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_AIRTANK_R270",
+      "type": "airtank",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_BOILER",
+      "type": "boiler",
+      "params": {}
+    },
+    {
+      "name": "ISO_CCOIL",
+      "type": "ccoil",
+      "params": {}
+    },
+    {
+      "name": "ISO_CHILLER",
+      "type": "chiller",
+      "params": {}
+    },
+    {
+      "name": "ISO_DAMPER",
+      "type": "damper",
+      "params": {}
+    },
+    {
+      "name": "ISO_DI",
+      "type": "di",
+      "params": {}
+    },
+    {
+      "name": "ISO_DI_R90",
+      "type": "di",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_DI_R180",
+      "type": "di",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_DI_R270",
+      "type": "di",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_DRYER",
+      "type": "dryer",
+      "params": {}
+    },
+    {
+      "name": "ISO_DRYER_R90",
+      "type": "dryer",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_DRYER_R180",
+      "type": "dryer",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_DRYER_R270",
+      "type": "dryer",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_DUCT",
+      "type": "duct",
+      "params": {}
+    },
+    {
+      "name": "ISO_DUCTJOINT",
+      "type": "ductjoint",
+      "params": {}
+    },
+    {
+      "name": "ISO_ELBOW",
+      "type": "elbow",
+      "params": {}
+    },
+    {
+      "name": "ISO_EXPTANK",
+      "type": "exptank",
+      "params": {}
+    },
+    {
+      "name": "ISO_EXPTANK2",
+      "type": "exptank2",
+      "params": {}
+    },
+    {
+      "name": "ISO_EXPTANK2_R90",
+      "type": "exptank2",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_EXPTANK2_R180",
+      "type": "exptank2",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_EXPTANK2_R270",
+      "type": "exptank2",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_FAN",
+      "type": "fan",
+      "params": {}
+    },
+    {
+      "name": "ISO_FCU",
+      "type": "fcu",
+      "params": {}
+    },
+    {
+      "name": "ISO_FILTER",
+      "type": "filter",
+      "params": {}
+    },
+    {
+      "name": "ISO_GASCAB",
+      "type": "gascab",
+      "params": {}
+    },
+    {
+      "name": "ISO_GASCAB_R90",
+      "type": "gascab",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_GASCAB_R180",
+      "type": "gascab",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_GASCAB_R270",
+      "type": "gascab",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_GASRACK",
+      "type": "gasrack",
+      "params": {}
+    },
+    {
+      "name": "ISO_GASRACK_R90",
+      "type": "gasrack",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_GASRACK_R180",
+      "type": "gasrack",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_GASRACK_R270",
+      "type": "gasrack",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_HCOIL",
+      "type": "hcoil",
+      "params": {}
+    },
+    {
+      "name": "ISO_HEADER",
+      "type": "header",
+      "params": {}
+    },
+    {
+      "name": "ISO_HEADER_R90",
+      "type": "header",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_HEADER_R180",
+      "type": "header",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_HEADER_R270",
+      "type": "header",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_HUMID",
+      "type": "humid",
+      "params": {}
+    },
+    {
+      "name": "ISO_INLINEFAN",
+      "type": "inlinefan",
+      "params": {}
+    },
+    {
+      "name": "ISO_JETFAN",
+      "type": "jetfan",
+      "params": {}
+    },
+    {
+      "name": "ISO_JOINT",
+      "type": "joint",
+      "params": {}
+    },
+    {
+      "name": "ISO_N2TANK",
+      "type": "n2tank",
+      "params": {}
+    },
+    {
+      "name": "ISO_N2TANK_R90",
+      "type": "n2tank",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_N2TANK_R180",
+      "type": "n2tank",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_N2TANK_R270",
+      "type": "n2tank",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_PHE",
+      "type": "phe",
+      "params": {}
+    },
+    {
+      "name": "ISO_PIPE",
+      "type": "pipe",
+      "params": {}
+    },
+    {
+      "name": "ISO_PUMP",
+      "type": "pump",
+      "params": {}
+    },
+    {
+      "name": "ISO_PUMPMS",
+      "type": "pumpms",
+      "params": {}
+    },
+    {
+      "name": "ISO_PUMPMS_R90",
+      "type": "pumpms",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_PUMPMS_R180",
+      "type": "pumpms",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_PUMPMS_R270",
+      "type": "pumpms",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_PUMPV",
+      "type": "pumpv",
+      "params": {}
+    },
+    {
+      "name": "ISO_PUMPV_R90",
+      "type": "pumpv",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_PUMPV_R180",
+      "type": "pumpv",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_PUMPV_R270",
+      "type": "pumpv",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_RO",
+      "type": "ro",
+      "params": {}
+    },
+    {
+      "name": "ISO_RO_R90",
+      "type": "ro",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_RO_R180",
+      "type": "ro",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_RO_R270",
+      "type": "ro",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_SCREW",
+      "type": "screw",
+      "params": {}
+    },
+    {
+      "name": "ISO_SCREW_R90",
+      "type": "screw",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_SCREW_R180",
+      "type": "screw",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_SCREW_R270",
+      "type": "screw",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_TEE",
+      "type": "tee",
+      "params": {}
+    },
+    {
+      "name": "ISO_TOWER",
+      "type": "tower",
+      "params": {}
+    },
+    {
+      "name": "ISO_VACUUM",
+      "type": "vacuum",
+      "params": {}
+    },
+    {
+      "name": "ISO_VACUUM_R90",
+      "type": "vacuum",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_VACUUM_R180",
+      "type": "vacuum",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_VACUUM_R270",
+      "type": "vacuum",
+      "params": {
+        "rot": 270
+      }
+    },
+    {
+      "name": "ISO_VALVE2",
+      "type": "valve2",
+      "params": {}
+    },
+    {
+      "name": "ISO_VALVE3",
+      "type": "valve3",
+      "params": {}
+    },
+    {
+      "name": "ISO_WATERTANK",
+      "type": "watertank",
+      "params": {}
+    },
+    {
+      "name": "ISO_WATERTANK_R90",
+      "type": "watertank",
+      "params": {
+        "rot": 90
+      }
+    },
+    {
+      "name": "ISO_WATERTANK_R180",
+      "type": "watertank",
+      "params": {
+        "rot": 180
+      }
+    },
+    {
+      "name": "ISO_WATERTANK_R270",
+      "type": "watertank",
+      "params": {
+        "rot": 270
+      }
+    }
+  ]
+}

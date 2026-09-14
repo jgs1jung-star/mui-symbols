@@ -1,0 +1,702 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>MUI 설비 심볼 라이브러리</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#E6EAED; --surface:#FFFFFF; --sunken:#F2F4F6; --line:#D2D9DF;
+  --ink:#1D2830; --muted:#5B6873; --accent:#0B67A8; --accent-ink:#FFFFFF; --accent-soft:#DCEAF5;
+  --run:#2FA35A; --stop:#8F989E; --alarm:#E0402F;
+  --canvas:#EEF1F3; --grid:#D5DCE1;
+  --sans:"IBM Plex Sans KR","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",Consolas,ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#11161A; --surface:#1A2127; --sunken:#141A1F; --line:#2B353D;
+    --ink:#E3E9ED; --muted:#96A3AD; --accent:#4DA3E0; --accent-ink:#0B1A24; --accent-soft:#1D3345;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#11161A; --surface:#1A2127; --sunken:#141A1F; --line:#2B353D;
+  --ink:#E3E9ED; --muted:#96A3AD; --accent:#4DA3E0; --accent-ink:#0B1A24; --accent-soft:#1D3345;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:13px/1.5 var(--sans);margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+.app{display:grid;grid-template-rows:auto 1fr;height:100vh;min-height:640px}
+header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.eyebrow{font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:17px;font-weight:600;margin:0}
+.toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.ctl{display:flex;align-items:center;gap:8px}
+.ctl>span{font-size:12px;color:var(--muted)}
+.seg{display:inline-flex;background:var(--sunken);border:1px solid var(--line);border-radius:6px;padding:2px}
+.seg button{font-weight:500;font-size:12.5px;color:var(--muted);background:none;border:0;border-radius:4px;padding:4px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+main{display:grid;grid-template-columns:236px minmax(0,1fr) 304px;min-height:0}
+.panel{background:var(--surface);overflow:auto;min-height:0}
+.palette{border-right:1px solid var(--line);padding:12px 10px 20px;display:grid;align-content:start;gap:14px}
+.palette h2,.insp h2{font-size:12px;font-weight:600;color:var(--muted);margin:0 2px 6px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pitem{all:unset;box-sizing:border-box;cursor:grab;border:1px solid var(--line);border-radius:6px;background:var(--sunken);display:grid;grid-template-rows:62px auto;overflow:hidden}
+.pitem:hover{border-color:var(--accent)}
+.pitem:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.pthumb{display:grid;place-items:center;padding:5px;background:var(--canvas)}
+.pthumb svg{max-width:100%;max-height:52px;width:auto;height:auto}
+.pitem span{font-size:11.5px;padding:4px 6px 5px;line-height:1.3;border-top:1px solid var(--line)}
+.pitem .tag{font:10px var(--mono);color:var(--accent);display:block}
+.stage{position:relative;background:var(--canvas);min-height:0;overflow:hidden}
+#cv{width:100%;height:100%;display:block;touch-action:none;cursor:default;user-select:none}
+#cv.panning{cursor:grabbing}
+.floatbar{position:absolute;top:10px;left:10px;display:flex;gap:6px;flex-wrap:wrap}
+.fbtn{background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:4px 9px;font-size:12px;cursor:pointer}
+.fbtn:hover{border-color:var(--accent)}
+.fbtn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.hint{position:absolute;left:10px;bottom:10px;right:10px;font-size:11.5px;color:#56636D;pointer-events:none;display:flex;flex-wrap:wrap;gap:4px 14px}
+.dark-canvas .hint{color:#A9B4BC}
+.hint b{font-weight:500;font-family:var(--mono);font-size:11px}
+.insp{border-left:1px solid var(--line);padding:14px 14px 24px;display:grid;align-content:start;gap:18px}
+.sel-head{display:grid;gap:2px}
+.sel-head h3{margin:0;font-size:16px;font-weight:600}
+.sel-head code{font:11.5px var(--mono);color:var(--muted)}
+.empty{color:var(--muted);margin:0}
+.fields{display:grid;gap:10px}
+.field{display:grid;gap:4px}
+.field label{font-size:12px;color:var(--muted);display:flex;justify-content:space-between}
+.field label output{font:12px var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+select,input[type=number]{background:var(--sunken);border:1px solid var(--line);border-radius:5px;padding:5px 7px;width:100%}
+.xyz{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.xyz label{font:11px var(--mono);color:var(--muted);display:grid;gap:2px}
+.row{display:flex;gap:6px;flex-wrap:wrap}
+.btn{background:var(--sunken);border:1px solid var(--line);border-radius:5px;padding:5px 10px;cursor:pointer;font-size:12.5px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.danger:hover{border-color:var(--alarm);color:var(--alarm)}
+.conn{font-size:12px;color:var(--muted);margin:0}
+.conn b{color:var(--run);font-weight:500}
+textarea{width:100%;height:110px;resize:vertical;font:10.5px/1.45 var(--mono);background:var(--sunken);border:1px solid var(--line);border-radius:5px;padding:7px}
+.check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.msg{font-size:12px;color:var(--muted);min-height:1.2em;margin:0}
+.note{font-size:11.5px;color:var(--muted);margin:0}
+/* symbol state on canvas + thumbnails */
+.st{transition:fill .2s}
+.s-run .st{fill:var(--run)}
+.s-alarm .st{fill:var(--alarm)}
+.s-stop .st{fill:var(--stop)}
+.rot{transform-box:fill-box;transform-origin:center}
+.s-run .rot{animation:spin 1.1s linear infinite}
+.s-alarm .st{animation:blink 1s steps(2,start) infinite}
+.pthumb .rot{animation:none!important}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blink{50%{fill:#7A1E15}}
+@media (prefers-reduced-motion:reduce){.s-run .rot,.s-alarm .st{animation:none}}
+.sel-box{fill:none;stroke:var(--accent);stroke-width:1.2;stroke-dasharray:5 4;vector-effect:non-scaling-stroke;pointer-events:none}
+.port{vector-effect:non-scaling-stroke;pointer-events:none}
+@media (max-width:1000px){
+  .app{height:auto}
+  main{grid-template-columns:1fr}
+  .stage{height:70vh}
+  .palette,.insp{border:0;border-top:1px solid var(--line)}
+  .pgrid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+}
+</style>
+
+<div class="app">
+  <header>
+    <div class="brand">
+      <h1>MUI 설비 심볼 스튜디오</h1>
+      <span class="eyebrow">Metasys UI 14.1 · Graphics+ · Isometric</span>
+    </div>
+    <div class="toolbar">
+      <div class="ctl"><span>상태</span>
+        <div class="seg" id="stateSeg">
+          <button data-v="stop" aria-pressed="false"><i class="dot" style="background:var(--stop)"></i>정지</button>
+          <button data-v="run" aria-pressed="true"><i class="dot" style="background:var(--run)"></i>운전</button>
+          <button data-v="alarm" aria-pressed="false"><i class="dot" style="background:var(--alarm)"></i>알람</button>
+        </div>
+      </div>
+      <div class="ctl"><span>캔버스</span>
+        <div class="seg" id="canvasSeg">
+          <button data-v="light" aria-pressed="true">밝게</button>
+          <button data-v="dark" aria-pressed="false">어둡게</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <aside class="panel palette" id="palette" aria-label="심볼 팔레트"></aside>
+
+    <div class="stage s-run" id="stage">
+      <svg id="cv" xmlns="http://www.w3.org/2000/svg" aria-label="배치 캔버스">
+        <g id="world"><g id="grid"></g><g id="items"></g><g id="overlay"></g></g>
+      </svg>
+      <div class="floatbar">
+        <button class="fbtn" id="zoomOut" aria-label="축소">−</button>
+        <button class="fbtn" id="zoomIn" aria-label="확대">+</button>
+        <button class="fbtn" id="fit">전체 보기</button>
+        <button class="fbtn" id="gridBtn" aria-pressed="true">그리드</button>
+        <button class="fbtn" id="routeBtn" aria-pressed="false" title="단축키 P">배관 그리기</button>
+        <button class="fbtn" id="adoptBtn" aria-pressed="false" title="Snap 할 때 배관 굵기·덕트 크기를 상대에 맞춤">굵기 자동 맞춤</button>
+        <button class="fbtn" id="resetBtn">예시 배치로 초기화</button>
+      </div>
+      <div class="hint">
+        <span><b>드래그</b> 이동</span><span><b>Shift+드래그</b> 높이(Z)</span><span><b>포트 근처</b> 자동 Snap</span><span><b>P</b> 배관 그리기 · <b>R</b> 선택 장비 90° 회전</span><span><b>빈 곳 드래그</b> 화면 이동 · <b>휠</b> 확대</span><span><b>Del</b> 삭제 · <b>Ctrl+D</b> 복제 · <b>방향키</b> 5 단위 이동</span>
+      </div>
+    </div>
+
+    <aside class="panel insp" id="insp" aria-label="속성">
+      <section id="selSec"></section>
+      <section>
+        <h2>SVG 내보내기</h2>
+        <div class="fields">
+          <label class="check"><input type="checkbox" id="animChk" checked> 운전 상태일 때 팬 회전 애니메이션 포함 (SMIL)</label>
+          <div class="row">
+            <button class="btn primary" id="copyAll">전체 배치 복사</button>
+            <button class="btn" id="copySel">선택 항목 복사</button>
+          </div>
+          <textarea id="code" readonly spellcheck="false" aria-label="SVG 코드"></textarea>
+          <p class="msg" id="msg"></p>
+          <p class="note">현재 상태 색이 코드에 반영됩니다. 상태 부위는 <code>class="st st-comp1"</code>, <code>st-fan3</code>처럼 부위별 클래스가 붙어 있어 Graphics+에서 개별 포인트로 바인딩할 수 있습니다.</p>
+        </div>
+      </section>
+    </aside>
+  </main>
+</div>
+
+<script src="../src/iso-symbols.js"></script>
+<script>
+const TYPES=[
+ {id:'pipe',ko:'배관',grp:'pipe'},{id:'elbow',ko:'90° 엘보',grp:'pipe'},{id:'tee',ko:'티',grp:'pipe'},{id:'joint',ko:'배관 조인트',grp:'pipe'},
+ {id:'header',ko:'헤더',grp:'pipe'},{id:'duct',ko:'사각덕트',grp:'pipe'},
+ {id:'pumpms',ko:'펌프 (횡형 다단)',grp:'pump'},{id:'pumpv',ko:'펌프 (입형 다단)',grp:'pump'},{id:'vacuum',ko:'진공펌프 (다연식)',grp:'pump'},
+ {id:'inlinefan',ko:'인라인팬 (사각덕트형)',grp:'pump'},{id:'jetfan',ko:'젯트팬',grp:'pump'},
+ {id:'aircomp',ko:'CDA 공기압축기',grp:'air'},{id:'airtank',ko:'CDA 리시버 탱크',grp:'air'},{id:'aftercooler',ko:'애프터쿨러',grp:'air'},
+ {id:'dryer',ko:'냉동식 드라이어',grp:'air'},{id:'adsorb',ko:'흡착식 드라이어',grp:'air'},
+ {id:'gascab',ko:'가스 캐비닛',grp:'gas'},{id:'gasrack',ko:'가스 랙',grp:'gas'},
+ {id:'ro',ko:'RO 장비',grp:'water'},{id:'di',ko:'DI 장비',grp:'water'},
+ {id:'n2tank',ko:'N2 탱크',grp:'tank'},{id:'watertank',ko:'시수탱크 (SUS 판넬)',grp:'tank'},{id:'exptank2',ko:'팽창탱크',grp:'tank'},
+ {id:'screw',ko:'스크류 냉동기 (센추리형)',grp:'tank'}
+];
+const TYPE=Object.fromEntries(TYPES.map(t=>[t.id,t]));
+const DIR2=[['x','↘ X'],['y','↙ Y']], DIR3=[['x','↘ X'],['y','↙ Y'],['z','↑ Z']];
+const DIRS6=[['+x','+X ↘'],['-x','−X ↖'],['+y','+Y ↙'],['-y','−Y ↗'],['+z','+Z ↑'],['-z','−Z ↓']];
+const SVC=[['chws','냉수 공급'],['chwr','냉수 환수'],['hws','온수 공급'],['hwr','온수 환수'],['cws','냉각수 공급'],['cwr','냉각수 환수'],['ref','냉매'],['steam','증기'],['steel','일반(강관)']];
+const SCHEMA={
+ jetfan:[{k:'dir',t:'seg',o:DIR2,l:'방향'},{k:'len',t:'range',min:120,max:420,step:10,l:'길이'},{k:'d',t:'range',min:30,max:100,step:2,l:'직경'}],
+ inlinefan:[{k:'dir',t:'seg',o:DIR2,l:'방향'},{k:'len',t:'range',min:60,max:180,step:2,l:'길이'},{k:'w',t:'range',min:40,max:160,step:2,l:'덕트 폭'},{k:'h',t:'range',min:30,max:140,step:2,l:'덕트 높이'}],
+ duct:[{k:'dir',t:'seg',o:DIR3,l:'방향'},{k:'len',t:'range',min:20,max:500,step:5,l:'길이'},{k:'w',t:'range',min:30,max:160,step:2,l:'폭'},{k:'h',t:'range',min:20,max:140,step:2,l:'높이'}],
+ pipe:[{k:'dir',t:'seg',o:DIR3,l:'방향'},{k:'len',t:'range',min:10,max:600,step:5,l:'길이'},{k:'d',t:'range',min:4,max:40,step:1,l:'굵기 (직경)'},{k:'svc',t:'select',o:SVC,l:'계통'},{k:'flange',t:'seg',o:[[1,'플랜지 있음'],[0,'없음']],l:'끝단'}],
+ joint:[{k:'d',t:'range',min:4,max:40,step:1,l:'굵기 (직경)'},{k:'svc',t:'select',o:SVC,l:'계통'}],
+ elbow:[{k:'a',t:'select',o:DIRS6,l:'첫째 방향'},{k:'b',t:'select',o:DIRS6,l:'둘째 방향'},{k:'d',t:'range',min:4,max:40,step:1,l:'굵기 (직경)'},{k:'svc',t:'select',o:SVC,l:'계통'}],
+ tee:[{k:'run',t:'seg',o:DIR3,l:'주관 방향'},{k:'br',t:'select',o:DIRS6,l:'분기 방향'},{k:'d',t:'range',min:4,max:40,step:1,l:'굵기 (직경)'},{k:'svc',t:'select',o:SVC,l:'계통'}],
+ n2tank:[{k:'cut',t:'seg',o:[[0,'외관'],[1,'단면·수위']],l:'표시'},{k:'level',t:'range',min:0,max:100,step:1,l:'수위 (%)'},{k:'h',t:'range',min:80,max:260,step:10,l:'동체 높이'},{k:'d',t:'range',min:40,max:110,step:2,l:'직경'}],
+ watertank:[{k:'cut',t:'seg',o:[[0,'외관'],[1,'단면·수위']],l:'표시'},{k:'level',t:'range',min:0,max:100,step:1,l:'수위 (%)'},{k:'nx',t:'range',min:2,max:8,step:1,l:'판넬 수 (X)'},{k:'ny',t:'range',min:2,max:8,step:1,l:'판넬 수 (Y)'},{k:'nz',t:'range',min:1,max:4,step:1,l:'판넬 단수 (높이)'}],
+ vacuum:[{k:'n',t:'range',min:1,max:4,step:1,l:'펌프 대수'}],
+ header:[{k:'dir',t:'seg',o:DIR2,l:'방향'},{k:'br',t:'select',o:[['up','위로 분기'],['down','아래로 분기'],['side','옆으로 분기'],['updown','위/아래 교대']],l:'분기 형태'},{k:'n',t:'range',min:2,max:10,step:1,l:'분기 수'},{k:'D',t:'range',min:16,max:70,step:2,l:'헤더 직경'},{k:'d',t:'range',min:6,max:30,step:1,l:'분기 직경'},{k:'valves',t:'seg',o:[[1,'밸브 있음'],[0,'밸브 없음']],l:'분기 밸브'},{k:'svc',t:'select',o:SVC,l:'계통'}],
+ pumpms:[{k:'stages',t:'range',min:2,max:10,step:1,l:'단수 (스테이지)'}],
+ pumpv:[{k:'stages',t:'range',min:2,max:14,step:1,l:'단수 (스테이지)'}],
+ airtank:[{k:'h',t:'range',min:60,max:240,step:10,l:'동체 높이'},{k:'d',t:'range',min:30,max:110,step:2,l:'직경'},{k:'col',t:'select',o:[['white','흰색'],['grey','회색'],['red','적색'],['blue','청색']],l:'도장 색'}],
+ exptank2:[{k:'h',t:'range',min:40,max:180,step:5,l:'동체 높이'},{k:'d',t:'range',min:30,max:110,step:2,l:'직경'},{k:'col',t:'select',o:[['red','적색'],['blue','청색'],['white','흰색'],['grey','회색']],l:'도장 색'}],
+ aftercooler:[{k:'len',t:'range',min:80,max:240,step:10,l:'쉘 길이'}],
+ adsorb:[{k:'h',t:'range',min:80,max:220,step:10,l:'타워 높이'}],
+ gascab:[{k:'cyl',t:'range',min:1,max:3,step:1,l:'실린더 수'}],
+ gasrack:[{k:'cyl',t:'range',min:1,max:8,step:1,l:'실린더 수'}],
+ ro:[{k:'vessels',t:'range',min:2,max:8,step:1,l:'멤브레인 베셀 수'}],
+ di:[{k:'cols',t:'range',min:2,max:4,step:1,l:'수지탑 수'}],
+ screw:[{k:'comp',t:'range',min:1,max:4,step:1,l:'압축기 대수'},{k:'fans',t:'range',min:1,max:12,step:1,l:'응축기 팬 대수'},{k:'rows',t:'seg',o:[[1,'1열'],[2,'2열']],l:'팬 배열'}]
+};
+const COLORS={stop:'#8F989E',run:'#2FA35A',alarm:'#E0402F'};
+const C30=0.8660254,S30=0.5, SNAP_PX=16, GRID=5;
+const $=id=>document.getElementById(id);
+const cv=$('cv'), world=$('world'), itemsG=$('items'), overlay=$('overlay'), stage=$('stage');
+let items=[], sel=null, uidSeq=1, state='run', view={tx:0,ty:0,k:1}, showGrid=true, drag=null, snapHit=null;
+
+/* ---------- palette ---------- */
+(function buildPalette(){
+  const groups=[['pipe','배관 · 헤더 · 덕트'],['pump','펌프 · 팬'],['air','CDA · 압축공기'],['gas','가스 공급'],['water','수처리'],['tank','탱크 · 냉동기']];
+  const pal=$('palette');
+  for(const [g,label] of groups){
+    const sec=document.createElement('section');
+    sec.innerHTML=`<h2>${label}</h2><div class="pgrid"></div>`;
+    const grid=sec.querySelector('.pgrid');
+    TYPES.filter(t=>t.grp===g).forEach(t=>{
+      const b=document.createElement('button');
+      b.className='pitem';b.draggable=true;b.title=t.ko+' 추가';
+      b.innerHTML=`<div class="pthumb s-stop">${ISO.build(t.id)}</div><span>${ISO.parametric(t.id)?'<i class="tag">PARAM</i>':''}${t.ko}</span>`;
+      b.addEventListener('click',()=>addAtCenter(t.id));
+      b.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',t.id);e.dataTransfer.effectAllowed='copy';});
+      grid.appendChild(b);
+    });
+    pal.appendChild(sec);
+  }
+})();
+
+/* ---------- geometry helpers ---------- */
+const proj=p=>ISO.proj(p);
+const addV=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]];
+const subV=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+function screenToSvg(cx,cy){const r=cv.getBoundingClientRect();return [(cx-r.left-view.tx)/view.k,(cy-r.top-view.ty)/view.k];}
+function svgToGround(u,v,z=0){v=v+z;const a=u/C30,b=v/S30;return [(a+b)/2,(b-a)/2,z];}
+const snapN=n=>Math.round(n/GRID)*GRID;
+
+/* ---------- items ---------- */
+function mount(it){
+  let g=itemsG.querySelector(`[data-uid="${it.uid}"]`);
+  if(!g){g=document.createElementNS('http://www.w3.org/2000/svg','g');g.dataset.uid=it.uid;itemsG.appendChild(g);}
+  const part=ISO.part(it.type,it.p,'i'+it.uid);
+  g.innerHTML=part.markup; it.box=part.box; place(it);
+}
+function place(it){
+  const q=proj(it.pos);
+  itemsG.querySelector(`[data-uid="${it.uid}"]`).setAttribute('transform',`translate(${q[0].toFixed(2)} ${q[1].toFixed(2)})`);
+}
+function depth(it){const c=addV(it.pos,ISO.center(it.type,it.p));return c[0]+c[1]+c[2]+(it.type==='joint'?it.p.d*3:0);}
+function sortItems(){items.slice().sort((a,b)=>depth(a)-depth(b)).forEach(it=>itemsG.appendChild(itemsG.querySelector(`[data-uid="${it.uid}"]`)));}
+function addItem(type,pos,p,noSnap){
+  const it={uid:uidSeq++,type,pos:noSnap?pos.slice():pos.map(snapN),p:ISO.params(type,p||{})};
+  items.push(it);mount(it);sortItems();return it;
+}
+function addAtCenter(type){
+  const r=cv.getBoundingClientRect(), s=screenToSvg(r.left+r.width/2,r.top+r.height/2), g=svgToGround(s[0],s[1]);
+  const c=ISO.center(type,ISO.params(type));
+  const it=addItem(type,[g[0]-c[0],g[1]-c[1],0]);
+  select(it.uid);save();
+}
+function removeItem(uid){
+  items=items.filter(i=>i.uid!==uid);
+  itemsG.querySelector(`[data-uid="${uid}"]`)?.remove();
+  if(sel===uid)select(null);drawOverlay();save();
+}
+function duplicate(uid){
+  const it=items.find(i=>i.uid===uid);if(!it)return;
+  const n=addItem(it.type,[it.pos[0]+20,it.pos[1]+20,it.pos[2]],{...it.p});select(n.uid);save();
+}
+const byUid=uid=>items.find(i=>i.uid===uid);
+
+/* ---------- ports & snapping ---------- */
+function worldPorts(it){return ISO.ports(it.type,it.p).map((pt,i)=>({...pt,wp:addV(it.pos,pt.p),it,i}));}
+function compatible(a,b){
+  if(a.kind!==b.kind)return false;
+  if(a.ax==='any'||b.ax==='any')return true;
+  return a.ax[1]===b.ax[1]&&a.ax[0]!==b.ax[0];
+}
+function findSnap(it){
+  const mine=worldPorts(it); if(!mine.length)return null;
+  let best=null;
+  for(const o of items){ if(o===it)continue;
+    for(const pb of worldPorts(o)) for(const pa of mine){
+      if(!compatible(pa,pb))continue;
+      const qa=proj(pa.wp),qb=proj(pb.wp), dist=Math.hypot(qa[0]-qb[0],qa[1]-qb[1])*view.k;
+      if(dist<SNAP_PX&&(!best||dist<best.dist))best={dist,pa,pb};
+    }
+  }
+  return best;
+}
+const ADOPT={pipe:1,elbow:1,tee:1,joint:1,duct:1,inlinefan:1};
+let adoptOn=false;
+function adoptSize(it,pb){
+  if(!adoptOn||!ADOPT[it.type])return false;
+  let changed=false;
+  if('d' in it.p&&typeof pb.d==='number'&&it.p.d!==pb.d&&ISO.parametric(it.type)){it.p.d=pb.d;changed=true;}
+  if('w' in it.p&&typeof pb.w==='number'&&typeof pb.h==='number'&&(it.p.w!==pb.w||it.p.h!==pb.h)){it.p.w=pb.w;it.p.h=pb.h;changed=true;}
+  return changed;
+}
+function connections(it){
+  let n=0;const mine=worldPorts(it);
+  for(const pa of mine) for(const o of items){ if(o===it)continue;
+    if(worldPorts(o).some(pb=>compatible(pa,pb)&&Math.hypot(...subV(pa.wp,pb.wp))<0.6)){n++;break;}
+  }
+  return [n,mine.length];
+}
+
+/* ---------- overlay: selection box + ports ---------- */
+function drawOverlay(){
+  let s='';
+  const showPorts=drag||sel;
+  if(showPorts){
+    const all=items.flatMap(worldPorts);
+    for(const pa of all){
+      const joined=all.some(pb=>pb.it!==pa.it&&compatible(pa,pb)&&Math.hypot(...subV(pa.wp,pb.wp))<0.6);
+      const q=proj(pa.wp), r=4.5/view.k;
+      const hot=snapHit&&(snapHit.pb===pa||snapHit.pa===pa);
+      s+=`<circle class="port" cx="${q[0]}" cy="${q[1]}" r="${(hot?7:r*view.k)/view.k}" fill="${joined?'#2FA35A':hot?'#0B67A8':'#FFFFFF'}" fill-opacity="${joined?.9:.85}" stroke="${joined?'#1E6B3A':'#0B67A8'}" stroke-width="1.4"/>`;
+    }
+  }
+  const it=byUid(sel);
+  if(it){
+    const q=proj(it.pos), b=it.box, pad=6/view.k;
+    s=`<rect class="sel-box" x="${q[0]+b[0]-pad}" y="${q[1]+b[1]-pad}" width="${b[2]-b[0]+2*pad}" height="${b[3]-b[1]+2*pad}" rx="${3/view.k}"/>`+s;
+  }
+  overlay.innerHTML=s+routePreview();
+}
+
+/* ---------- view ---------- */
+function applyView(){world.setAttribute('transform',`translate(${view.tx} ${view.ty}) scale(${view.k})`);drawGrid();drawOverlay();}
+function drawGrid(){
+  const g=$('grid');
+  if(!showGrid){g.innerHTML='';return;}
+  if(g.dataset.built)return;
+  let d='';const N=1400,st=20;
+  for(let i=-N;i<=N;i+=st){const a=proj([i,-N,0]),b=proj([i,N,0]),c=proj([-N,i,0]),e=proj([N,i,0]);d+=`M${a[0]} ${a[1]}L${b[0]} ${b[1]}M${c[0]} ${c[1]}L${e[0]} ${e[1]}`;}
+  g.innerHTML=`<path d="${d}" stroke="var(--grid)" stroke-width="1" vector-effect="non-scaling-stroke" fill="none"/>`;
+  g.dataset.built=1;
+}
+function fitView(){
+  const r=cv.getBoundingClientRect(); if(!items.length||!r.width)return;
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  for(const it of items){const q=proj(it.pos);x0=Math.min(x0,q[0]+it.box[0]);y0=Math.min(y0,q[1]+it.box[1]);x1=Math.max(x1,q[0]+it.box[2]);y1=Math.max(y1,q[1]+it.box[3]);}
+  const pad=60, k=Math.min((r.width-pad*2)/(x1-x0),(r.height-pad*2-30)/(y1-y0),2.5);
+  view.k=k; view.tx=r.width/2-(x0+x1)/2*k; view.ty=(r.height-30)/2-(y0+y1)/2*k+10; applyView();
+}
+function zoomAt(f,cx,cy){
+  const r=cv.getBoundingClientRect(); if(cx==null){cx=r.left+r.width/2;cy=r.top+r.height/2;}
+  const nk=Math.max(0.25,Math.min(5,view.k*f)), px=cx-r.left, py=cy-r.top;
+  view.tx=px-(px-view.tx)*nk/view.k; view.ty=py-(py-view.ty)*nk/view.k; view.k=nk; applyView();
+}
+$('zoomIn').onclick=()=>zoomAt(1.25); $('zoomOut').onclick=()=>zoomAt(0.8); $('fit').onclick=fitView;
+$('routeBtn').onclick=()=>setRouting(!routing);
+$('adoptBtn').onclick=e=>{adoptOn=!adoptOn;e.currentTarget.setAttribute('aria-pressed',adoptOn);};
+$('gridBtn').onclick=e=>{showGrid=!showGrid;e.currentTarget.setAttribute('aria-pressed',showGrid);drawGrid();};
+cv.addEventListener('wheel',e=>{e.preventDefault();zoomAt(e.deltaY<0?1.12:0.89,e.clientX,e.clientY);},{passive:false});
+
+/* ---------- pointer interaction ---------- */
+cv.addEventListener('contextmenu',e=>{if(routing)e.preventDefault();});
+cv.addEventListener('dblclick',e=>{if(routing&&route){e.preventDefault();commitRoute(null);}});
+cv.addEventListener('pointerdown',e=>{
+  if(routing&&e.button===0){if(e.detail<2)routeDown(e);return;}
+  if(routing){cv.setPointerCapture(e.pointerId);drag={mode:'pan',sx:e.clientX,sy:e.clientY,tx:view.tx,ty:view.ty};cv.classList.add('panning');return;}
+  const g=e.target.closest('[data-uid]');
+  cv.setPointerCapture(e.pointerId);
+  if(g){
+    const it=byUid(+g.dataset.uid); select(it.uid);
+    drag={mode:'item',it,start:[...it.pos],sx:e.clientX,sy:e.clientY,z:e.shiftKey,moved:false};
+  }else{
+    select(null);
+    drag={mode:'pan',sx:e.clientX,sy:e.clientY,tx:view.tx,ty:view.ty};cv.classList.add('panning');
+  }
+});
+cv.addEventListener('pointermove',e=>{
+  if(routing&&!drag){const c=routeCandidate(e);if(route)route.cursor=c;else hoverCand=c;drawOverlay();return;}
+  if(!drag)return;
+  const dX=(e.clientX-drag.sx)/view.k, dY=(e.clientY-drag.sy)/view.k;
+  if(drag.mode==='pan'){view.tx=drag.tx+(e.clientX-drag.sx);view.ty=drag.ty+(e.clientY-drag.sy);applyView();return;}
+  const it=drag.it; drag.moved=true;
+  if(drag.z||e.shiftKey){it.pos=[drag.start[0],drag.start[1],snapN(drag.start[2]-dY)];}
+  else{const a=dX/C30,b=dY/S30;it.pos=[snapN(drag.start[0]+(a+b)/2),snapN(drag.start[1]+(b-a)/2),drag.start[2]];}
+  snapHit=findSnap(it);
+  if(snapHit){
+    it.pos=addV(it.pos,subV(snapHit.pb.wp,snapHit.pa.wp));
+    if(adoptSize(it,snapHit.pb)){mount(it);snapHit=findSnap(it)||snapHit;}
+  }
+  place(it);drawOverlay();
+});
+function endDrag(){
+  if(!drag)return;
+  const wasItem=drag.mode==='item'&&drag.moved;
+  cv.classList.remove('panning');drag=null;snapHit=null;
+  if(wasItem){sortItems();renderInspector();save();}
+  drawOverlay();
+}
+cv.addEventListener('pointerup',endDrag);cv.addEventListener('pointercancel',endDrag);
+stage.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='copy';});
+stage.addEventListener('drop',e=>{
+  e.preventDefault();const type=e.dataTransfer.getData('text/plain');if(!TYPE[type])return;
+  const s=screenToSvg(e.clientX,e.clientY),g=svgToGround(s[0],s[1]),c=ISO.center(type,ISO.params(type));
+  const it=addItem(type,[g[0]-c[0],g[1]-c[1],0]);
+  const hit=findSnap(it); if(hit){it.pos=addV(it.pos,subV(hit.pb.wp,hit.pa.wp));if(adoptSize(it,hit.pb))mount(it);place(it);sortItems();}
+  select(it.uid);save();
+});
+document.addEventListener('keydown',e=>{
+  if(e.target.closest('input,textarea,select'))return;
+  const it=byUid(sel);
+  if(e.key==='p'||e.key==='P'){e.preventDefault();setRouting(!routing);return;}
+  if(routing){
+    if(e.key==='Enter'){e.preventDefault();commitRoute(null);}
+    else if(e.key==='Escape'){if(route){route=null;drawOverlay();}else setRouting(false);}
+    else if(e.key==='Backspace'&&route){e.preventDefault();route.pts.pop();if(!route.pts.length)route=null;drawOverlay();}
+    return;
+  }
+  if(e.key==='Escape'){select(null);return;}
+  if(!it)return;
+  if((e.key==='r'||e.key==='R')&&ISO.rotatable(it.type)){e.preventDefault();rotateItem(it,((it.p.rot||0)+90)%360);return;}
+  const nudge={ArrowRight:[GRID,0,0],ArrowLeft:[-GRID,0,0],ArrowDown:[0,GRID,0],ArrowUp:[0,-GRID,0],PageUp:[0,0,GRID],PageDown:[0,0,-GRID]}[e.key];
+  if(nudge){e.preventDefault();it.pos=addV(it.pos,nudge);place(it);sortItems();drawOverlay();renderInspector();save();}
+  else if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();removeItem(it.uid);}
+  else if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='d'){e.preventDefault();duplicate(it.uid);}
+});
+
+/* ---------- pipe routing tool ---------- */
+// Click a port / a pipe / empty floor to start, click to add orthogonal bends (Shift = vertical), finish on a port or pipe
+// (or double-click / Enter). Straight runs become pipe items, bends become elbows, a start/end on the middle of a pipe splits it with a tee.
+const routeCfg={d:12,svc:'chws'};
+let routing=false, route=null;
+const AXV={x:[1,0,0],y:[0,1,0],z:[0,0,1]};
+const PIPEY={pipe:1,elbow:1,tee:1,joint:1};
+function axStr(v){const k=Math.abs(v[0])>0.5?'x':Math.abs(v[1])>0.5?'y':'z';return (v[0]+v[1]+v[2]<0?'-':'+')+k;}
+function distScreen(a,b){const p=proj(a),q=proj(b);return Math.hypot(p[0]-q[0],p[1]-q[1])*view.k;}
+function setRouting(on){
+  routing=on; route=null;
+  $('routeBtn').setAttribute('aria-pressed',on);
+  cv.style.cursor=on?'crosshair':'';
+  if(on)select(null); else {renderInspector();drawOverlay();}
+}
+// what is under the cursor: a free port, the body of a pipe, or the floor
+function routeCandidate(e){
+  const s=screenToSvg(e.clientX,e.clientY);
+  let best=null;
+  for(const it of items) for(const pt of worldPorts(it)){
+    if(pt.kind!=='pipe')continue;
+    const q=proj(pt.wp),dd=Math.hypot(q[0]-s[0],q[1]-s[1])*view.k;
+    if(dd<SNAP_PX&&(!best||dd<best.dist))best={dist:dd,p:pt.wp.slice(),port:pt};
+  }
+  if(best)return best;
+  for(const it of items){
+    if(it.type!=='pipe')continue;
+    const ax=AXV[it.p.dir],A=it.pos,Bw=addV(A,ax.map(v=>v*it.p.len)),pa=proj(A),pb=proj(Bw);
+    const vx=pb[0]-pa[0],vy=pb[1]-pa[1],L2=vx*vx+vy*vy||1;
+    let t=((s[0]-pa[0])*vx+(s[1]-pa[1])*vy)/L2;
+    const dd=Math.hypot(pa[0]+vx*t-s[0],pa[1]+vy*t-s[1])*view.k, room=it.p.d*2+10;
+    if(dd<SNAP_PX&&t*it.p.len>room&&t*it.p.len<it.p.len-room){
+      const along=Math.round(t*it.p.len/GRID)*GRID;
+      if(!best||dd<best.dist)best={dist:dd,p:addV(A,ax.map(v=>v*along)),pipe:it};
+    }
+  }
+  if(best)return best;
+  const last=route&&route.pts.length?route.pts[route.pts.length-1]:null;
+  if(!last){const g=svgToGround(s[0],s[1],0);return {p:[snapN(g[0]),snapN(g[1]),0]};}
+  if(e.shiftKey){const lq=proj(last);return {p:[last[0],last[1],snapN(last[2]-(s[1]-lq[1]))]};}
+  const g=svgToGround(s[0],s[1],last[2]),dx=g[0]-last[0],dy=g[1]-last[1];
+  return {p:Math.abs(dx)>=Math.abs(dy)?[snapN(g[0]),last[1],last[2]]:[last[0],snapN(g[1]),last[2]]};
+}
+// orthogonal path between two points; leave along `firstAx`, arrive along `lastAx` when given
+function orthPath(A,B,firstAx,lastAx){
+  let order=['x','y','z'];
+  if(lastAx){order=order.filter(k=>k!==lastAx);order.push(lastAx);}
+  if(firstAx&&firstAx!==lastAx){order=order.filter(k=>k!==firstAx);order.unshift(firstAx);}
+  const pts=[A.slice()];let cur=A.slice();
+  for(const k of order){const i='xyz'.indexOf(k);if(Math.abs(B[i]-cur[i])>0.01){cur=cur.slice();cur[i]=B[i];pts.push(cur);}}
+  return pts;
+}
+function simplify(pts){
+  const out=[];
+  for(const p of pts){if(out.length&&Math.hypot(...subV(p,out[out.length-1]))<0.01)continue;out.push(p);}
+  for(let i=out.length-2;i>=1;i--){
+    const a=subV(out[i],out[i-1]),b=subV(out[i+1],out[i]);
+    const cr=[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+    if(Math.hypot(...cr)<1e-6)out.splice(i,1);
+  }
+  return out;
+}
+// split a pipe at a point with a tee whose branch points along `br`; returns the branch port position
+function splitPipe(it,point,br){
+  const d=it.p.d, Ln=d*2+8, ax=AXV[it.p.dir], i='xyz'.indexOf(it.p.dir), a0=it.pos[i], a1=it.pos[i]+it.p.len, c=point[i];
+  const base={...it.p};
+  removeItem(it.uid);
+  if(c-Ln-a0>1){const pos=it.pos.slice();addItem('pipe',pos,{...base,len:c-Ln-a0},true);}
+  if(a1-(c+Ln)>1){const pos=it.pos.slice();pos[i]=c+Ln;addItem('pipe',pos,{...base,len:a1-(c+Ln)},true);}
+  addItem('tee',point.slice(),{run:it.p.dir,br,d,svc:base.svc},true);
+  return addV(point,AXV[br[1]].map(v=>v*(br[0]==='-'?-1:1)*Ln));
+}
+function commitRoute(endCand){
+  if(!route||!route.pts.length){route=null;drawOverlay();return;}
+  let pts=route.pts.slice();
+  const startCand=route.start;
+  if(endCand){
+    const last=pts[pts.length-1], endAx=endCand.port&&endCand.port.ax!=='any'?endCand.port.ax[1]:(endCand.pipe?null:null);
+    const firstAx=pts.length===1&&startCand.port&&startCand.port.ax!=='any'?startCand.port.ax[1]:null;
+    pts=pts.slice(0,-1).concat(orthPath(last,endCand.p,firstAx,endAx));
+  }
+  pts=simplify(pts);
+  if(pts.length<2){route=null;drawOverlay();return;}
+  const d=route.d, svc=route.svc;
+  // tees on pipe bodies
+  if(startCand.pipe){const br=axStr(subV(pts[1],pts[0]));pts[0]=splitPipe(startCand.pipe,pts[0],br);}
+  if(endCand&&endCand.pipe){const n=pts.length;const br=axStr(subV(pts[n-2],pts[n-1]));pts[n-1]=splitPipe(endCand.pipe,pts[n-1],br);}
+  pts=simplify(pts);
+  const L=d*1.5+10, n=pts.length, seg=[];
+  for(let i=0;i<n-1;i++){const v=subV(pts[i+1],pts[i]),len=Math.hypot(...v);seg.push({v:v.map(x=>x/len),len});}
+  const elbowAt=[];
+  for(let i=1;i<n-1;i++)elbowAt[i]=seg[i-1].len>=L+(i-1>0?L:0)+1&&seg[i].len>=L+(i+1<n-1?L:0)+1;
+  for(let i=0;i<n-1;i++){
+    const s0=i>0&&elbowAt[i]?L:0, s1=i+1<n-1&&elbowAt[i+1]?L:0, len=seg[i].len-s0-s1;
+    if(len<0.5)continue;
+    const A=addV(pts[i],seg[i].v.map(x=>x*s0)),B=subV(pts[i+1],seg[i].v.map(x=>x*s1));
+    const k=Math.abs(seg[i].v[0])>0.5?'x':Math.abs(seg[i].v[1])>0.5?'y':'z';
+    addItem('pipe',[Math.min(A[0],B[0]),Math.min(A[1],B[1]),Math.min(A[2],B[2])],{dir:k,len,d,svc,flange:0},true);
+  }
+  for(let i=1;i<n-1;i++){
+    if(elbowAt[i])addItem('elbow',pts[i].slice(),{a:axStr(seg[i-1].v.map(x=>-x)),b:axStr(seg[i].v),d,svc},true);
+    else addItem('joint',pts[i].slice(),{d,svc},true);
+  }
+  route=null;sortItems();save();drawOverlay();
+  $('msg').textContent='배관을 연결했습니다.';
+}
+function routeDown(e){
+  const c=routeCandidate(e);
+  if(!route){
+    const src=c.port?c.port.it:c.pipe;
+    const d=c.port&&typeof c.port.d==='number'&&PIPEY[c.port.it.type]?c.port.d:(c.pipe?c.pipe.p.d:routeCfg.d);
+    const svc=src&&src.p&&src.p.svc?src.p.svc:routeCfg.svc;
+    route={pts:[c.p],start:c,d,svc,cursor:null};
+  }else if(c.port||c.pipe){commitRoute(c);return;}
+  else route.pts.push(c.p);
+  drawOverlay();
+}
+function routePreview(){
+  if(!routing)return '';
+  let s='';
+  if(route){
+    let pts=route.pts.slice();
+    if(route.cursor){
+      const last=pts[pts.length-1], c=route.cursor;
+      pts=pts.concat((c.port||c.pipe)?orthPath(last,c.p,null,c.port&&c.port.ax!=='any'?c.port.ax[1]:null).slice(1):[c.p]);
+    }
+    const w=Math.max(2,route.d*1.1);
+    const dd=pts.map((p,i)=>{const q=proj(p);return (i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1);}).join('');
+    s+=`<path d="${dd}" fill="none" stroke="#0B67A8" stroke-opacity=".35" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round" style="pointer-events:none"/>`;
+    s+=`<path d="${dd}" fill="none" stroke="#0B67A8" stroke-width="1.5" stroke-dasharray="6 4" vector-effect="non-scaling-stroke" style="pointer-events:none"/>`;
+    for(const p of route.pts){const q=proj(p);s+=`<circle cx="${q[0]}" cy="${q[1]}" r="${4/view.k}" fill="#0B67A8" style="pointer-events:none"/>`;}
+  }
+  const hc=route&&route.cursor?route.cursor:hoverCand;
+  if(hc&&(hc.port||hc.pipe)){const q=proj(hc.p);s+=`<circle cx="${q[0]}" cy="${q[1]}" r="${8/view.k}" fill="none" stroke="#E0402F" stroke-width="2" vector-effect="non-scaling-stroke" style="pointer-events:none"/>`;}
+  return s;
+}
+let hoverCand=null;
+
+/* ---------- inspector ---------- */
+function select(uid){sel=uid;renderInspector();drawOverlay();}
+// rotate in place: keep the item's centre where it was
+function rotateItem(it,deg){
+  const c0=addV(it.pos,ISO.center(it.type,it.p));
+  it.p.rot=deg;
+  const c1=addV(it.pos,ISO.center(it.type,it.p));
+  it.pos=subV(it.pos,subV(c1,c0)).map(v=>Math.round(v*10)/10);
+  mount(it);sortItems();renderInspector();drawOverlay();save();
+}
+const ROTF={k:'rot',t:'seg',o:[[0,'0°'],[90,'90°'],[180,'180°'],[270,'270°']],l:'방향 (회전 · R 키)'};
+function renderInspector(){
+  const sec=$('selSec'), it=byUid(sel);
+  if(!it&&routing){
+    sec.innerHTML=`<h2>배관 그리기</h2><div class="fields">
+      <p class="empty">① 포트·배관·바닥을 클릭해 시작 ② 꺾을 곳마다 클릭 (Shift = 수직) ③ 다른 포트나 배관 위를 클릭하면 자동으로 이어서 완료. 더블클릭·Enter로 그 자리에서 끝내기, Backspace 한 점 취소, Esc 종료. 배관 중간을 클릭하면 티로 분기합니다.</p>
+      <div class="field"><label for="r-d">굵기 (직경) — 포트/배관에서 시작하면 그 굵기를 따름<output id="ro-d">${routeCfg.d}</output></label><input type="range" id="r-d" min="4" max="40" step="1" value="${routeCfg.d}"></div>
+      <div class="field"><label for="r-svc">계통</label><select id="r-svc">${SVC.map(([ov,ol])=>`<option value="${ov}"${ov===routeCfg.svc?' selected':''}>${ol}</option>`).join('')}</select></div></div>`;
+    $('r-d').oninput=e=>{routeCfg.d=+e.target.value;$('ro-d').textContent=e.target.value;};
+    $('r-svc').onchange=e=>{routeCfg.svc=e.target.value;};
+    return;
+  }
+  if(!it){
+    sec.innerHTML=`<h2>선택 항목</h2><p class="empty">캔버스에서 장비를 선택하면 길이·굵기·대수·방향을 바꿀 수 있습니다. 왼쪽 팔레트에서 클릭하거나 끌어다 놓아 추가하고, 배관은 <b>배관 그리기(P)</b>로 이으세요.</p>`;
+    return;
+  }
+  const [c,n]=connections(it);
+  let h=`<h2>선택 항목</h2><div class="fields"><div class="sel-head"><h3>${TYPE[it.type].ko}</h3><code>${it.type} · #${it.uid}</code></div>`;
+  for(const f of (SCHEMA[it.type]||[]).concat(ISO.rotatable(it.type)&&!it.p.cut?[ROTF]:[])){
+    const v=it.p[f.k];
+    if(f.t==='range')h+=`<div class="field"><label for="f-${f.k}">${f.l}<output id="o-${f.k}">${v}</output></label><input type="range" id="f-${f.k}" data-k="${f.k}" min="${f.min}" max="${f.max}" step="${f.step}" value="${v}"></div>`;
+    else if(f.t==='select')h+=`<div class="field"><label for="f-${f.k}">${f.l}</label><select id="f-${f.k}" data-k="${f.k}">${f.o.map(([ov,ol])=>`<option value="${ov}"${ov==v?' selected':''}>${ol}</option>`).join('')}</select></div>`;
+    else h+=`<div class="field"><label>${f.l}</label><div class="seg" data-k="${f.k}">${f.o.map(([ov,ol])=>`<button data-v="${ov}" aria-pressed="${ov==v}">${ol}</button>`).join('')}</div></div>`;
+  }
+  h+=`<div class="field"><label>위치 (월드 좌표)</label><div class="xyz">${['X','Y','Z'].map((a,i)=>`<label>${a}<input type="number" step="${GRID}" data-pos="${i}" value="${it.pos[i]}"></label>`).join('')}</div></div>`;
+  if(n)h+=`<p class="conn">연결 포트 <b>${c}</b> / ${n}</p>`;
+  h+=`<div class="row"><button class="btn" id="dupBtn">복제</button><button class="btn danger" id="delBtn">삭제</button></div></div>`;
+  sec.innerHTML=h;
+  sec.querySelectorAll('input[type=range]').forEach(inp=>inp.addEventListener('input',()=>{
+    it.p[inp.dataset.k]=+inp.value;$('o-'+inp.dataset.k).textContent=inp.value;mount(it);drawOverlay();save();
+  }));
+  sec.querySelectorAll('select').forEach(s=>s.addEventListener('change',()=>{it.p[s.dataset.k]=s.value;mount(it);save();}));
+  sec.querySelectorAll('.seg[data-k]').forEach(g=>g.addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;const k=g.dataset.k;
+    if(k==='rot'){rotateItem(it,+b.dataset.v);return;}
+    it.p[k]=isNaN(+b.dataset.v)?b.dataset.v:+b.dataset.v;
+    mount(it);sortItems();renderInspector();drawOverlay();save();
+  }));
+  sec.querySelectorAll('input[data-pos]').forEach(inp=>inp.addEventListener('change',()=>{
+    it.pos[+inp.dataset.pos]=+inp.value;place(it);sortItems();drawOverlay();save();
+  }));
+  $('dupBtn').onclick=()=>duplicate(it.uid);
+  $('delBtn').onclick=()=>removeItem(it.uid);
+}
+
+/* ---------- state / canvas toggles ---------- */
+function seg(elId,fn){
+  const g=$(elId);
+  g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));fn(b.dataset.v);});
+}
+seg('stateSeg',v=>{stage.classList.remove('s-'+state);state=v;stage.classList.add('s-'+v);});
+seg('canvasSeg',v=>{
+  const dark=v==='dark';
+  document.documentElement.style.setProperty('--canvas',dark?'#2E3438':'#EEF1F3');
+  document.documentElement.style.setProperty('--grid',dark?'#3B4449':'#D5DCE1');
+  stage.classList.toggle('dark-canvas',dark);
+});
+
+/* ---------- export ---------- */
+function stateFill(svg){return svg.replace(/fill="#8F989E"( class="st)/g,`fill="${COLORS[state]}"$1`);}
+function exportItems(list){
+  const anim=state==='run'&&$('animChk').checked;
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9,body='';
+  for(const it of list.slice().sort((a,b)=>depth(a)-depth(b))){
+    const part=ISO.part(it.type,it.p,'i'+it.uid,anim), q=proj(it.pos), b=part.box;
+    x0=Math.min(x0,q[0]+b[0]);y0=Math.min(y0,q[1]+b[1]);x1=Math.max(x1,q[0]+b[2]);y1=Math.max(y1,q[1]+b[3]);
+    body+=`<g id="${it.type}-${it.uid}" transform="translate(${q[0].toFixed(2)} ${q[1].toFixed(2)})">${part.markup}</g>`;
+  }
+  const vx=Math.floor(x0-4),vy=Math.floor(y0-4),W=Math.ceil(x1+4)-vx,H=Math.ceil(y1+4)-vy;
+  return stateFill(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vx} ${vy} ${W} ${H}" width="${W}" height="${H}">${body}</svg>`);
+}
+async function copyOut(text,label){
+  const ta=$('code'),msg=$('msg');ta.value=text;
+  try{await navigator.clipboard.writeText(text);msg.textContent=`${label} SVG를 복사했습니다 (${(text.length/1024).toFixed(1)} KB).`;}
+  catch(_){ta.focus();ta.select();let ok=false;try{ok=document.execCommand('copy');}catch(__){}
+    msg.textContent=ok?`${label} SVG를 복사했습니다.`:'자동 복사가 차단됐습니다. 선택된 코드를 Ctrl+C로 복사하세요.';}
+}
+$('copyAll').onclick=()=>{if(!items.length){$('msg').textContent='캔버스가 비어 있습니다. 팔레트에서 장비를 추가하세요.';return;}copyOut(exportItems(items),'전체 배치');};
+$('copySel').onclick=()=>{const it=byUid(sel);if(!it){$('msg').textContent='먼저 캔버스에서 장비를 선택하세요.';return;}copyOut(exportItems([it]),TYPE[it.type].ko);};
+
+/* ---------- persistence + example layout ---------- */
+const KEY='mui-studio-v3';
+function save(){try{localStorage.setItem(KEY,JSON.stringify(items.map(({uid,type,pos,p})=>({uid,type,pos,p}))));}catch(_){}}
+function loadExample(){
+  items=[];itemsG.innerHTML='';uidSeq=1;
+  addItem('aircomp',[0,-40,0]);
+  addItem('airtank',[230,0,0],{h:120,d:56});
+  addItem('dryer',[300,-60,0]);
+  addItem('adsorb',[430,-70,0],{h:130});
+  addItem('header',[0,150,0],{n:5,br:'up',svc:'chws'});
+  addItem('pumpv',[80,300,0],{stages:6});
+  addItem('pumpv',[170,300,0],{stages:6});
+  addItem('pumpms',[260,300,0],{stages:5});
+  addItem('gascab',[480,150,0],{cyl:2});
+  addItem('gasrack',[580,150,0],{cyl:4});
+  addItem('ro',[0,470,0],{vessels:4});
+  addItem('di',[250,480,0],{cols:3});
+  addItem('watertank',[480,380,0],{nx:4,ny:3,nz:2,cut:1,level:60});
+  select(null);save();
+}
+function cleanParams(type,p){
+  const def=ISO.params(type),out=ISO.params(type,p);
+  for(const k in def){if(typeof def[k]==='number'&&!(typeof out[k]==='number'&&isFinite(out[k])))out[k]=def[k];if(typeof def[k]==='string'&&typeof out[k]!=='string')out[k]=def[k];}
+  return out;
+}
+function load(){
+  let data=null;try{data=JSON.parse(localStorage.getItem(KEY));}catch(_){}
+  if(!Array.isArray(data)||!data.length){loadExample();return;}
+  items=[];itemsG.innerHTML='';
+  for(const d of data){if(!TYPE[d.type])continue;const it={uid:d.uid,type:d.type,pos:d.pos,p:cleanParams(d.type,d.p)};items.push(it);mount(it);uidSeq=Math.max(uidSeq,d.uid+1);}
+  sortItems();
+}
+$('resetBtn').onclick=()=>{loadExample();fitView();};
+
+load();renderInspector();
+requestAnimationFrame(()=>{applyView();fitView();});
+new ResizeObserver(()=>drawOverlay()).observe(cv);
+</script>
+
+</body></html>
